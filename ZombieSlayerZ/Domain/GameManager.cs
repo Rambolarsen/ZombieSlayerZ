@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ZombieSlayerZ.Domain.Entities;
 using ZombieSlayerZ.Domain.Loots;
 using ZombieSlayerZ.Domain.Spawners;
 
@@ -41,8 +42,6 @@ namespace ZombieSlayerZ.Domain
             return _loot;
         }
 
-        public HumanoidState GetPlayerState() => Player.State;
-
         public string DisplayCurrentStats()
         {
             var stringBuilder = new StringBuilder();
@@ -57,5 +56,8 @@ namespace ZombieSlayerZ.Domain
         {
             Player.WeaponEquipped = weapon;
         }
+
+        public bool PlayerIsAlive() =>
+            Player.State != HumanoidState.Dead;        
     }
 }

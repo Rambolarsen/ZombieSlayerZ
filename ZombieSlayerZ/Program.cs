@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using ZombieSlayerZ.Data;
 using ZombieSlayerZ.Domain;
+using ZombieSlayerZ.Domain.Entities;
 using ZombieSlayerZ.Domain.Loots;
 using ZombieSlayerZ.Domain.Spawners;
 
@@ -22,7 +23,7 @@ namespace ZombieSlayerZ
             using var scope = Container.BeginLifetimeScope();
             _gameManager = scope.Resolve<IGameManager>();
             
-            while (_gameManager.GetPlayerState() != HumanoidState.Dead)
+            while (_gameManager.PlayerIsAlive())
             {
                 _gameManager.StartRound();
                 //spawn round logic
@@ -48,7 +49,6 @@ namespace ZombieSlayerZ
                             var equip = Console.ReadLine();
                             if (equip.Equals("y", StringComparison.InvariantCultureIgnoreCase))
                                 _gameManager.EquipWeapon(loot.Weapon);
-                            
                         }
                         else
                         {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using ZombieSlayerZ.Domain.Loots;
 
-namespace ZombieSlayerZ.Domain
+namespace ZombieSlayerZ.Domain.Entities
 {
     public class Human : IHumanoid
     {
@@ -22,9 +22,7 @@ namespace ZombieSlayerZ.Domain
         public Weapon WeaponEquipped { get; set; }
         public HumanoidState State { get; set; } = HumanoidState.Idle;
 
-        public double Attack()
-        {
-            return AttackRating + WeaponEquipped.GetDamage();
-        }
+        public double Attack() => AttackRating + (WeaponEquipped?.GetDamage() ?? 0);
+        
     }
 }
