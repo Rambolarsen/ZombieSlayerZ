@@ -1,11 +1,7 @@
 ﻿using Autofac;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using ZombieSlayerZ.Data;
 using ZombieSlayerZ.Domain;
-using ZombieSlayerZ.Domain.Entities;
 using ZombieSlayerZ.Domain.Loots;
 using ZombieSlayerZ.Domain.Spawners;
 
