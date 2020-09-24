@@ -41,7 +41,7 @@ namespace ZombieSlayerZ
                         Console.WriteLine(loot.ToString());
                         if(loot.Weapon != null)
                         {
-                            Console.WriteLine("Equip the weapon?(y): ");
+                            Console.WriteLine("Equip the weapon?(y/n): ");
                             var equip = Console.ReadLine();
                             if (equip.Equals("y", StringComparison.InvariantCultureIgnoreCase))
                                 _gameManager.EquipWeapon(loot.Weapon);

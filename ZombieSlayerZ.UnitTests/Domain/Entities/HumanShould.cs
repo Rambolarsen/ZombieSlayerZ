@@ -20,23 +20,29 @@ namespace ZombieSlayerZ.UnitTests.Domain.Entities
 
 
         [Test]
-        public void HealthShouldBe100AndCurrentShouldBeEqual_v1()
+        public void OnNew_HealthShouldBe100AndCurrentShouldBeEqual_v1()
         {
+            //Arrange
             var expectedHealth = 99;
+
+            //Assert
             Assert.That(_sut.Health == expectedHealth);
             Assert.That(_sut.CurrentHealth == _sut.Health);
         }
 
         [Test]
-        public void HealthShouldBe100AndCurrentShouldBeEqual_v2()
+        public void OnNew_HealthShouldBe100AndCurrentShouldBeEqual_v2()
         {
+            //Arrange
             var expectedHealth = 99;
+
+            //Assert
             _sut.Health.Should().Be(expectedHealth);
             _sut.CurrentHealth.Should().Be(_sut.Health);                
         }
 
         [Test]
-        public void Attack_WithoutWeaponShouldGiveAttackEqualToAttackRating_v1()
+        public void OnAttack_GiveAttackEqualToAttackRatingAndWeapon_v1()
         {
             //Arrange
             var weaponType = new WeaponType("TestWeapon", 1.2);
@@ -48,7 +54,7 @@ namespace ZombieSlayerZ.UnitTests.Domain.Entities
         }
 
         [Test]
-        public void Attack_WithoutWeaponShouldGiveAttackEqualToAttackRating_v2()
+        public void OnAttack_GiveAttackEqualToAttackRatingAndWeapon_v2()
         {
             //Arrange
             var weapon = new Fixture().Create<Weapon>();
@@ -59,7 +65,7 @@ namespace ZombieSlayerZ.UnitTests.Domain.Entities
         }
 
         [Test, AutoData]
-        public void Attack_WithoutWeaponShouldGiveAttackEqualToAttackRating_v3(Weapon weapon, Human sut)
+        public void OnAttack_GiveAttackEqualToAttackRatingAndWeapon_v3(Weapon weapon, Human sut)
         {
             //Arrange
             sut.WeaponEquipped = weapon;

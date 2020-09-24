@@ -1,11 +1,10 @@
-﻿using FakeItEasy;
+﻿using AutoFixture;
+using AutoFixture.AutoFakeItEasy;
+using AutoFixture.NUnit3;
+using FakeItEasy;
 using FluentAssertions;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using ZombieSlayerZ.Domain;
-using ZombieSlayerZ.Domain.Entities;
 using ZombieSlayerZ.Domain.Spawners;
 
 namespace ZombieSlayerZ.UnitTests.Domain
@@ -14,30 +13,58 @@ namespace ZombieSlayerZ.UnitTests.Domain
     public class GameManagerShould
     {
 
-        private GameManager _sut;
-        private ILootSpawner _lootSpawner;
-        private IZombieSpawner _zombieSpawner;
-
-        [SetUp]
-        public void Init()
+        [Test]
+        public void OnNew_PlayerIsAlive_ShouldBeTrue()
         {
-            _lootSpawner = A.Fake<ILootSpawner>();
-            _zombieSpawner = A.Fake<IZombieSpawner>();
-            _sut = new GameManager(_lootSpawner, _zombieSpawner);
+            //Arrange
+            var lootSpawner = A.Fake<ILootSpawner>();
+            var zombieSpawner = A.Fake<IZombieSpawner>();
+            var sut = new GameManager(lootSpawner, zombieSpawner);
+
+            //Assert
+            sut.PlayerIsAlive().Should().BeTrue();
         }
 
         [Test]
-        public void PlayerIsAlive_ShouldBeTrue()
+        public void OnSpawn_VerifyCallsToLootSpawner_V1()
         {
-            _sut.PlayerIsAlive().Should().BeTrue();
+            //Arrange
+            var lootSpawner = A.Fake<ILootSpawner>();
+            var zombieSpawner = A.Fake<IZombieSpawner>();
+            var sut = new GameManager(lootSpawner, zombieSpawner);
+
+            //Act
+            sut.Spawn();
+
+            //Assert
+            A.CallTo(() => lootSpawner.Spawn(A<int>._)).MustHaveHappenedOnceExactly();            
         }
 
         [Test]
-        public void Spawn_VerifyCallsToSpawnInterfaces()
+        public void Spawn_VerifyCallsToLootSpawner_V2()
         {
-            _sut.Spawn();
-            A.CallTo(() => _lootSpawner.Spawn(A<int>._)).MustHaveHappenedOnceExactly();
-            A.CallTo(() => _zombieSpawner.Spawn(A<int>._)).MustHaveHappenedOnceExactly();
+            //Arrange
+            var fixture = new Fixture();
+            fixture.Customize(new AutoFakeItEasyCustomization());
+            var mocklootSpawner = fixture.Freeze<Fake<ILootSpawner>>();
+            var sut = fixture.Create<GameManager>();
+
+            //Act
+            sut.Spawn();
+
+            //Assert
+            mocklootSpawner.CallsTo(x => x.Spawn(A<int>._)).MustHaveHappenedOnceExactly();
+        }
+
+        [Test]
+        [AutoFakeItEasyData]
+        public void Spawn_VerifyCallsToLootSpawner_V3([Frozen] Fake<ILootSpawner> mockLootSpawner, GameManager sut)
+        {
+            //Act
+            sut.Spawn();
+
+            //Assert
+            mockLootSpawner.CallsTo(x => x.Spawn(A<int>._)).MustHaveHappenedOnceExactly();
         }
     }
 }

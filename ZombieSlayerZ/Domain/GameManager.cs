@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using ZombieSlayerZ.Domain.Entities;
 using ZombieSlayerZ.Domain.Loots;
