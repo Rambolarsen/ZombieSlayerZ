@@ -7,18 +7,18 @@ using ZombieSlayerZ.Domain.Spawners;
 
 namespace ZombieSlayerZ
 {
-    class Program
+    internal class Program
     {
         private static IContainer Container { get; set; }
         private static IGameManager _gameManager;
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             RegisterAssemblyTypes();
 
             using var scope = Container.BeginLifetimeScope();
             _gameManager = scope.Resolve<IGameManager>();
-            
+
             while (_gameManager.PlayerIsAlive())
             {
                 _gameManager.StartRound();
@@ -28,9 +28,8 @@ namespace ZombieSlayerZ
                 Console.WriteLine(_gameManager.DisplayCurrentStats());
                 //select action
                 DisplayActions();
-                
-                GameAction action = GetGameActionFromConsole(Console.ReadLine());
 
+                GameAction action = GetGameActionFromConsole(Console.ReadLine());
 
                 //run action logic
                 switch (action)
@@ -39,7 +38,7 @@ namespace ZombieSlayerZ
                         Console.WriteLine("Searching for loot...");
                         var loot = _gameManager.GetLoot();
                         Console.WriteLine(loot.ToString());
-                        if(loot.Weapon != null)
+                        if (loot.Weapon != null)
                         {
                             Console.WriteLine("Equip the weapon?(y/n): ");
                             var equip = Console.ReadLine();
@@ -51,11 +50,13 @@ namespace ZombieSlayerZ
                             Console.ReadLine();
                         }
                         break;
+
                     case GameAction.Fight:
                         //Check for zombies to fight.
                         //fight zombies.
 
                         break;
+
                     case GameAction.Run:
                         Console.WriteLine("You ran away!");
                         Console.ReadLine();
@@ -79,9 +80,9 @@ namespace ZombieSlayerZ
 
         private static GameAction GetGameActionFromConsole(string action)
         {
-            if(Enum.TryParse<GameAction>(action, out var gameAction))
+            if (Enum.TryParse<GameAction>(action, out var gameAction))
                 return gameAction;
-            
+
             Console.Clear();
             Console.WriteLine(_gameManager.DisplayCurrentStats());
             DisplayActions();
@@ -99,11 +100,11 @@ namespace ZombieSlayerZ
         }
     }
 
-        public enum GameAction
-        {
-            Search = 1,
-            UseConsumable = 2,
-            Fight = 3,
-            Run = 4
-        }    
+    public enum GameAction
+    {
+        Search = 1,
+        UseConsumable = 2,
+        Fight = 3,
+        Run = 4
+    }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ZombieSlayerZ.Domain.Entities
+﻿namespace ZombieSlayerZ.Domain.Entities
 {
     public class Zombie : IHumanoid
     {
@@ -11,7 +7,7 @@ namespace ZombieSlayerZ.Domain.Entities
         public double DefenseRating { get; set; }
         public double Health { get; set; }
         public double CurrentHealth { get; set; }
-        public Horde Horde { get;}
+        public Horde Horde { get; }
         public HumanoidState State { get; set; } = HumanoidState.Idle;
     }
 }

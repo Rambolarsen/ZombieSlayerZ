@@ -12,6 +12,7 @@ namespace ZombieSlayerZ.Domain
         private readonly IZombieSpawner _zombieSpawner;
         private int _currentLevel = 0;
         private Loot _loot;
+
         public GameManager(ILootSpawner lootSpawner, IZombieSpawner zombieSpawner)
         {
             _lootSpawner = lootSpawner;
@@ -20,7 +21,6 @@ namespace ZombieSlayerZ.Domain
         }
 
         public void StartRound() => _currentLevel++;
-            
 
         private readonly List<Zombie> _zombies = new List<Zombie>();
         public IReadOnlyCollection<Zombie> Zombies => _zombies;
@@ -37,7 +37,7 @@ namespace ZombieSlayerZ.Domain
 
         public Loot GetLoot()
         {
-            Player.State = HumanoidState.Searching;            
+            Player.State = HumanoidState.Searching;
             return _loot;
         }
 
@@ -57,6 +57,6 @@ namespace ZombieSlayerZ.Domain
         }
 
         public bool PlayerIsAlive() =>
-            Player.State != HumanoidState.Dead;        
+            Player.State != HumanoidState.Dead;
     }
 }

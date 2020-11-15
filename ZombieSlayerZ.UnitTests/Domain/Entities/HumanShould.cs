@@ -23,7 +23,7 @@ namespace ZombieSlayerZ.UnitTests.Domain.Entities
         public void OnNew_HealthShouldBe100AndCurrentShouldBeEqual_v1()
         {
             //Arrange
-            var expectedHealth = 99;
+            var expectedHealth = 100;
 
             //Assert
             Assert.That(_sut.Health == expectedHealth);
@@ -34,7 +34,7 @@ namespace ZombieSlayerZ.UnitTests.Domain.Entities
         public void OnNew_HealthShouldBe100AndCurrentShouldBeEqual_v2()
         {
             //Arrange
-            var expectedHealth = 99;
+            var expectedHealth = 100;
 
             //Assert
             _sut.Health.Should().Be(expectedHealth);

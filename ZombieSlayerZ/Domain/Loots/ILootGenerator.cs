@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ZombieSlayerZ.Domain.Loots
+﻿namespace ZombieSlayerZ.Domain.Loots
 {
     public interface ILootGenerator<T>
     {

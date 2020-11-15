@@ -61,9 +61,9 @@ namespace ZombieSlayerZ.Domain.Loots
         }
 
         public string Name { get; private set; }
+
         public double BaseMultiplier { get; private set; }
+
         public override string ToString() => Name;
     }
-
-
 }

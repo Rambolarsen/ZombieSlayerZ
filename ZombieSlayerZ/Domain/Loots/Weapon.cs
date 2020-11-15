@@ -1,7 +1,4 @@
-﻿
-using System;
-
-namespace ZombieSlayerZ.Domain.Loots
+﻿namespace ZombieSlayerZ.Domain.Loots
 {
     public class Weapon : ILootQuality
     {
@@ -15,7 +12,7 @@ namespace ZombieSlayerZ.Domain.Loots
         public WeaponType Type { get; set; }
         public double BaseDamage { get; set; }
         public LootQuality Quality { get; set; } = LootQuality.Common;
-        
+
         public double GetDamage()
         {
             return (BaseDamage + GetDamageFromQuality()) * Type.BaseMultiplier;
@@ -29,18 +26,23 @@ namespace ZombieSlayerZ.Domain.Loots
                 case LootQuality.Common:
                     bonusDamage = 0;
                     break;
+
                 case LootQuality.Uncommon:
                     bonusDamage = 2;
                     break;
+
                 case LootQuality.Rare:
                     bonusDamage = 5;
                     break;
+
                 case LootQuality.Epic:
                     bonusDamage = 10;
                     break;
+
                 case LootQuality.Legendary:
                     bonusDamage = 20;
                     break;
+
                 default:
                     break;
             }
@@ -49,7 +51,7 @@ namespace ZombieSlayerZ.Domain.Loots
 
         public override string ToString()
         {
-            return $"{Quality} {Type.ToString()}: Damage {GetDamage()}";
+            return $"{Quality} {Type}: Damage {GetDamage()}";
         }
     }
 }

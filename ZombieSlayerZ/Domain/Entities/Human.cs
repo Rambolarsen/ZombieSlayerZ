@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ZombieSlayerZ.Domain.Loots;
+﻿using ZombieSlayerZ.Domain.Loots;
 
 namespace ZombieSlayerZ.Domain.Entities
 {
@@ -23,6 +19,5 @@ namespace ZombieSlayerZ.Domain.Entities
         public HumanoidState State { get; set; } = HumanoidState.Idle;
 
         public double Attack() => AttackRating + (WeaponEquipped?.GetDamage() ?? 0);
-        
     }
 }

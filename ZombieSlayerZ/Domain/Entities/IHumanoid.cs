@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ZombieSlayerZ.Domain.Entities
+﻿namespace ZombieSlayerZ.Domain.Entities
 {
     public interface IHumanoid
     {
